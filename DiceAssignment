@@ -1,3 +1,4 @@
+//Aaron Rodda & Veida Hernandez
 package dicegame;
 import java.util.Scanner;
 import java.util.Random;
@@ -14,21 +15,24 @@ public class DiceGame {
         System.out.println("Welcome to Gambling Addiction Online™");
         System.out.print("Enter how many dice to roll (max 6): ");
         dInput[0] = input.nextInt();
-        while(dInput[0] > 6 || dInput[0] < 1){
-        System.out.print("Error! Input a number between 1 and 6: ");
-        dInput[0] = input.nextInt();
+        while(dInput[0] > 6 || dInput[0] < 1)
+        {
+            System.out.print("Error! Input a number between 1 and 6: ");
+            dInput[0] = input.nextInt();
         }
         System.out.print("Enter how many sides for each dice (max 10): ");
         dInput[1] = input.nextInt();
-        while(dInput[1] > 10 || dInput[1] < 1){
-        System.out.print("Error! Input a number between 1 and 10: ");
-        dInput[1] = input.nextInt();
+        while(dInput[1] > 10 || dInput[1] < 1)
+        {
+            System.out.print("Error! Input a number between 1 and 10: ");
+            dInput[1] = input.nextInt();
         }
         System.out.print("How many times should we roll (max 10,000,000): ");
         dInput[2] = input.nextInt();
-        while(dInput[2] > 10000000 || dInput[2] < 1){
-        System.out.print("Error! Input a number between 1 and 10,000,000: ");
-        dInput[2] = input.nextInt();
+        while(dInput[2] > 10000000 || dInput[2] < 1)
+        {
+            System.out.print("Error! Input a number between 1 and 10,000,000: ");
+            dInput[2] = input.nextInt();
         }
         //Set min and max for determing Random roll range
         int max = dInput[0]*dInput[1];
@@ -39,9 +43,11 @@ public class DiceGame {
             int c = roll.nextInt(max - min + 1) + min;
             dTally[c] += 1;    
         }
+        
         System.out.printf("%10s%15s\n", "Amount Rolled", "Times Rolled");
-        for (int i = dInput[0]; i <= max; i++) {
-        System.out.printf("%10d%15d\n", i, dTally[i]);
+        for (int i = dInput[0]; i <= max; i++)
+        {
+             System.out.printf("%10d%15d\n", i, dTally[i]);
         }
 //      Testing code
 //      System.out.printf("%10s%15s\n", "Dice Total", "Rolled");
