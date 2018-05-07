@@ -1,72 +1,70 @@
 //Aaron Rodda & Veida Hernandez
-package dicegame;
+package dice;
 import java.util.Scanner;
 import java.util.Random;
 
-public class DiceGame {
-    public static void main(String[] args) 
+public class Main
+{
+    public static void main(String[] args)
+
     {
-        Random roll = new Random();
         Scanner input = new Scanner(System.in);
-        // Creates array with 3 elements: 0, 1, 2
-        int[] dInput = new int[3];
-        // Creates array with 60 elements: from 0 to 59
-        int[] dTally = new int[61];
+        Random roll = new Random();
+        int[] userInput = new int[3];
+        int[] diceTally = new int[62];
+        int counter = 0;
+
         System.out.println("Welcome to Gambling Addiction Online™");
         System.out.print("Enter how many dice to roll (max 6): ");
-        dInput[0] = input.nextInt();
-        while(dInput[0] > 6 || dInput[0] < 1)
+        userInput[0] = input.nextInt();
+        while(userInput[0] > 6 || userInput[0] < 1)
         {
             System.out.print("Error! Input a number between 1 and 6: ");
-            dInput[0] = input.nextInt();
+            userInput[0] = input.nextInt();
         }
         System.out.print("Enter how many sides for each dice (max 10): ");
-        dInput[1] = input.nextInt();
-        while(dInput[1] > 10 || dInput[1] < 1)
+        userInput[1] = input.nextInt();
+        while(userInput[1] > 10 || userInput[1] < 1)
         {
             System.out.print("Error! Input a number between 1 and 10: ");
-            dInput[1] = input.nextInt();
+            userInput[1] = input.nextInt();
         }
         System.out.print("How many times should we roll (max 10,000,000): ");
-        dInput[2] = input.nextInt();
-        while(dInput[2] > 10000000 || dInput[2] < 1)
+        userInput[2] = input.nextInt();
+        while(userInput[2] > 10000000 || userInput[2] < 1)
         {
             System.out.print("Error! Input a number between 1 and 10,000,000: ");
-            dInput[2] = input.nextInt();
+            userInput[2] = input.nextInt();
         }
-        //Set min and max for determing Random roll range
-        int max = dInput[0]*dInput[1];
-        int min = dInput[0];
-        //For loop rolls dInput[2] number of times
-        for (int i = 0; i < dInput[2]; i++)
+
+        for(int i = 0; i < userInput[2]; i++)
         {
-            int c = roll.nextInt(max - min + 1) + min;
-            dTally[c] += 1;    
+            for(int j = 0; j < userInput[0]; j++)
+            {
+                counter = counter + roll.nextInt(userInput[1]) + 1;
+            }
+            diceTally[counter] += 1;
+            counter = 0;
         }
-        
+
         System.out.printf("%10s%15s\n", "Amount Rolled", "Times Rolled");
-        for (int i = dInput[0]; i <= max; i++)
+        for (int i = userInput[0]; i <= userInput[0]*userInput[1]; i++)
         {
-             System.out.printf("%10d%15d\n", i, dTally[i]);
+            System.out.printf("%10d%15d\n", i, diceTally[i]);
         }
 //      Testing code
 //      System.out.printf("%10s%15s\n", "Dice Total", "Rolled");
 //      for (int i = 0; i < 64; i++) {
-//      System.out.printf("%10d%15d\n", i + 1, dTally[i]);
+//      System.out.printf("%10d%15d\n", i + 1, diceTally[i]);
 //       }
         int sum = 0;
-        for (int c = 0; c < dTally.length; c++)
+        for (int c = 0; c < diceTally.length; c++)
         {
-            sum += dTally[c];
+            sum += diceTally[c];
         }
         System.out.printf("\nTotal Rolls");
         System.out.printf("\n%d\n", sum);
-    } 
+    }
 }
 
-/*
-dInput[0] = # of Dice
-dInput[1] = # of Sides
-dInput[2] = # of Rolls
-dTally[0-59] = max # of tallies
-*/
+
