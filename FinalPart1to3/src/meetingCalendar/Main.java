@@ -1,5 +1,4 @@
 package meetingCalendar;
-import java.io.IOException;
 import java.util.*;
 public class Main
 {
@@ -15,11 +14,11 @@ public class Main
     }
     public static void main(String[] args)
     {
-        Meeting[] meetings = new Meeting[100000];
-        Time[] times = new Time[100000];
+        Meeting[] meetings = new Meeting[10];
         Scanner in = new Scanner(System.in);
         int input;
         int meetingCount = 1;
+        int opt = 0;
 
         do {
             //<editor-fold desc="Main Menu">
@@ -54,34 +53,26 @@ public class Main
                     int p = in.nextInt();
                     System.out.print("Day: ");
                     int d = in.nextInt();
-                    System.out.print("Week: ");
-                    int w = in.nextInt();
                     System.out.print("Start: ");
                     int st = in.nextInt();
                     System.out.print("End: ");
                     int et = in.nextInt();
-
                     System.out.printf("Meeting ID: %d\n", meetingCount);
                     int id = meetingCount;
-                    times[id] = new Time(st, et);
-                    meetings[meetingCount++] = new Meeting(s, p, d, w, id);
-                    break;
+                    meetings[meetingCount++] = new Meeting(s, p, d, id, st, et);
                 //</editor-fold>
                 //<editor-fold desc="Opt 2 INCOMPLETE">
                 case 2:
-                    int opt = in.nextInt();
-                    try {
-                        for (int i = 0; i < meetings.length; i++){
+                    for(int a = 1; a <= 7; a++)
+                    {
+                        for (Meeting meeting : meetings) {
                             try {
-                                System.out.println(meetings[i].getWeek(opt));
-                            }
-                            catch(NullPointerException a){
-                                System.out.println("No meetings scheduled");
+                                int b = meeting.getDay();
+                                if (meeting.checkDay(a, b))
+                                    System.out.println("\n" + meeting);
+                            } catch (Exception e) {
                             }
                         }
-
-                    }catch(IndexOutOfBoundsException e){
-                        System.out.println("No meetings scheduled");
                     }
                     break;
                 //</editor-fold>
@@ -93,7 +84,6 @@ public class Main
                     if (meetings[opt]!=null) {
                         System.out.print("\n");
                         System.out.print(meetings[opt]);
-                        System.out.println(times[opt]);
                     }
                     else
                         System.out.println("\nMeeting Does Not Exist.");
